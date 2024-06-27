@@ -152,7 +152,6 @@ class SignInScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Implement your sign-in logic here
-                // For example, you can validate credentials and navigate to another screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignedInScreen()),
@@ -227,9 +226,10 @@ class SignUpScreen extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),git
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
                 // Implement your sign-up logic here
-                // For example, you can validate the form and navigate to another screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignedUpScreen()),
@@ -264,8 +264,7 @@ class SignedUpScreen extends StatelessWidget {
 class CalculatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Calculator', home: Calculation(), theme: ThemeData.dark());
+    return Calculation();
   }
 }
 
@@ -338,68 +337,61 @@ class _CalculationState extends State<Calculation> {
   }
 
   bool _isOperator(String input) {
-    if (input == "+" || input == "-" || input == "*" || input == "/") {
-      return true;
-    }
-    return false;
+    return input == "+" || input == "-" || input == "*" || input == "/";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calculator by clb")),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: TextField(
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.right,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-                controller: TextEditingController()..text = output,
-                readOnly: true,
-              ),
+      appBar: AppBar(title: Text("Calculator")),
+      body: Column(
+        children: <Widget>[
+          TextField(
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.right,
+            decoration: InputDecoration(
+              border: InputBorder.none,
             ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 4,
-                children: <Widget>[
-                  for (var i = 0; i <= 9; i++)
-                    TextButton(
-                      child: Text("$i", style: TextStyle(fontSize: 25)),
-                      onPressed: () => _handlePress("$i"),
-                    ),
+            controller: TextEditingController()..text = output,
+            readOnly: true,
+          ),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 4,
+              children: <Widget>[
+                for (var i = 0; i <= 9; i++)
                   TextButton(
-                    child: Text("C", style: TextStyle(fontSize: 25)),
-                    onPressed: _handleClear,
+                    child: Text("$i", style: TextStyle(fontSize: 25)),
+                    onPressed: () => _handlePress("$i"),
                   ),
-                  TextButton(
-                    child: Text("+", style: TextStyle(fontSize: 25)),
-                    onPressed: () => _handlePress("+"),
-                  ),
-                  TextButton(
-                    child: Text("-", style: TextStyle(fontSize: 25)),
-                    onPressed: () => _handlePress("-"),
-                  ),
-                  TextButton(
-                    child: Text("*", style: TextStyle(fontSize: 25)),
-                    onPressed: () => _handlePress("*"),
-                  ),
-                  TextButton(
-                    child: Text("/", style: TextStyle(fontSize: 25)),
-                    onPressed: () => _handlePress("/"),
-                  ),
-                  TextButton(
-                    child: Text("=", style: TextStyle(fontSize: 25)),
-                    onPressed: () => _handlePress("="),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+                TextButton(
+                  child: Text("C", style: TextStyle(fontSize: 25)),
+                  onPressed: _handleClear,
+                ),
+                TextButton(
+                  child: Text("+", style: TextStyle(fontSize: 25)),
+                  onPressed: () => _handlePress("+"),
+                ),
+                TextButton(
+                  child: Text("-", style: TextStyle(fontSize: 25)),
+                  onPressed: () => _handlePress("-"),
+                ),
+                TextButton(
+                  child: Text("*", style: TextStyle(fontSize: 25)),
+                  onPressed: () => _handlePress("*"),
+                ),
+                TextButton(
+                  child: Text("/", style: TextStyle(fontSize: 25)),
+                  onPressed: () => _handlePress("/"),
+                ),
+                TextButton(
+                  child: Text("=", style: TextStyle(fontSize: 25)),
+                  onPressed: () => _handlePress("="),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
